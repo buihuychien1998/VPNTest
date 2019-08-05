@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.hidero.testsolar.utils.BindingUtilsKt" />
+        <variable
+                name="handlers"
+                type="com.hidero.testsolar.MainActivity" />
+        <variable
+                name="mData"
+                type="com.hidero.testsolar.models.Data" />
+    </data>
+
+    <RelativeLayout
+            android:id="@+id/layoutContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity">
+
+        <RelativeLayout
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#F3F3F3">
+
+            <ImageButton
+                    android:id="@+id/btnBack"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/effect_on_button"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_back"
+                    tools:ignore="ContentDescription"
+                    tools:targetApi="m" />
+
+            <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_toRightOf="@id/btnBack"
+                    android:text="@string/ip_address_checker"
+                    android:textColor="@color/color_tilte"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+        </RelativeLayout>
+
+        <LinearLayout
+                android:id="@+id/layoutWifiName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_below="@id/toolBar"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:gravity="center"
+                android:weightSum="10">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:paddingLeft="15dp"
+                    android:text="@string/wifi_name"
+                    android:textColor="@color/color_0_7_black"
+                    android:textSize="@dimen/_13sdp" />
+
+            <TextView
+                    android:id="@+id/tvWifiName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:text="@{mData.wifiName}"
+                    android:textColor="@color/color_3_7_black"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
+
+            <ImageView
+                    android:id="@+id/ivWifiStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="1"
+                    android:src="@{safeUnbox(mData.wifiStatus), default=@drawable/ic_wireless_protected_net}" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/layoutIDAddress"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_below="@+id/layoutWifiName"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:gravity="center"
+                android:weightSum="10">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:paddingLeft="15dp"
+                    android:text="@string/ip_address"
+                    android:textColor="@color/color_0_7_black"
+                    android:textSize="@dimen/_13sdp" />
+
+            <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="4">
+
+                <TextView
+                        android:visibility="@{mData.ipAddress != null ? View.VISIBLE : View.GONE}"
+                        android:text="@{mData.ipAddress}"
+                        android:id="@+id/tvIPAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="right"
+                        android:singleLine="true"
+                        android:textColor="@color/color_tilte"
+                        android:textSize="@dimen/_15sdp" />
+
+                <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/gifIP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/test"
+                        android:visibility="@{mData.ipAddress == null ? View.VISIBLE : View.GONE}" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/layoutCountry"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_56sdp"
+                android:layout_below="@id/layoutIDAddress"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+                        android:text="Connect time"
+                        android:textColor="@color/color_0_7_black"
+                        android:textSize="@dimen/_10sdp" />
+
+                <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="2">
+
+                    <TextView
+                            android:visibility="@{mData.connectTime != null ? View.VISIBLE : View.GONE}"
+                            android:id="@+id/tvConnectTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="@{mData.connectTime}"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_14sdp" />
+
+                    <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/gifTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/test"
+                            android:visibility="@{mData.connectTime == null ? View.VISIBLE : View.GONE}" />
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+                        android:text="Country"
+                        android:textColor="@color/color_0_7_black"
+                        android:textSize="@dimen/_10sdp" />
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:weightSum="4">
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="5dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_mask_group" />
+
+                    <TextView
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:id="@+id/tvCountry"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:text="@{mData.country}"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_14sdp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:gravity="bottom"
+                        android:text="Ping"
+                        android:textColor="@color/color_0_7_black"
+                        android:textSize="@dimen/_10sdp" />
+                <FrameLayout
+                        android:layout_weight="2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp">
+                    <TextView
+                            android:visibility="@{mData.ping != null ? View.VISIBLE : View.GONE}"
+                            android:id="@+id/tvPing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:text="@{mData.ping}"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/_14sdp" />
+                    <pl.droidsonroids.gif.GifImageView
+                            android:id="@+id/gifPing"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/test"
+                            android:visibility="@{mData.ping == null ? View.VISIBLE : View.GONE}" />
+                </FrameLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/layoutCountry"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:background="#c0c0c0" />
+
+        <LinearLayout
+                android:id="@+id/layoutMACAddress"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_below="@+id/line"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:gravity="center"
+                android:weightSum="10">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:paddingLeft="15dp"
+                    android:text="MAC address"
+                    android:textColor="@color/color_0_7_black"
+                    android:textSize="@dimen/_13sdp" />
+            <FrameLayout
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:visibility="@{mData.macAddress != null ? View.VISIBLE : View.GONE}"
+                        android:text="@{mData.macAddress}"
+                        android:id="@+id/tvMACAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right"
+                        android:layout_gravity="center"
+                        android:singleLine="true"
+                        android:textColor="@color/color_tilte"
+                        android:textSize="@dimen/_15sdp" />
+                <pl.droidsonroids.gif.GifImageView
+                        android:id="@+id/gifMAC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/test"
+                        android:visibility="@{mData.macAddress == null ? View.VISIBLE : View.GONE}" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/layoutDeviceName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_below="@id/layoutMACAddress"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:gravity="center"
+                android:weightSum="10">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="7"
+                    android:paddingLeft="15dp"
+                    android:text="@string/device_name"
+                    android:textColor="@color/color_0_7_black"
+                    android:textSize="@dimen/_13sdp" />
+
+            <ImageView
+                    android:id="@+id/ivDeviceAndroid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_device_android" />
+
+            <TextView
+                    android:text="@{mData.deviceName}"
+                    android:id="@+id/tvDeviceName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="2"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:textColor="@color/color_tilte"
+                    android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/layoutVersionAndroid"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_below="@+id/layoutDeviceName"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:gravity="center"
+                android:weightSum="10">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:paddingLeft="15dp"
+                    android:text="Version android"
+                    android:textColor="@color/color_0_7_black"
+                    android:textSize="@dimen/_13sdp" />
+
+            <TextView
+                    android:id="@+id/tvVersionAndroid"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_weight="4"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="@{mData.versionAndroid}"
+                    android:textColor="@color/color_tilte"
+                    android:textSize="@dimen/_15sdp" />
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/tvNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layoutVersionAndroid"
+                android:layout_marginVertical="@dimen/_15sdp"
+                android:gravity="center"
+                android:text="@string/note"
+                android:textColor="#FF9900"
+                android:textSize="@dimen/_13sdp" />
+
+        <Button
+                android:id="@+id/btnProtect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvNote"
+                android:layout_marginHorizontal="15dp"
+                android:background="@drawable/bg_btn_protect"
+                android:onClick="@{handlers::myClick}"
+                android:text="@string/protect_your_data"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_15sdp"
+                tools:targetApi="o" />
+    </RelativeLayout>
+</layout>

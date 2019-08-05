@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+          package="com.hidero.testsolar">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION "/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION "/>
+
+    <application
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:usesCleartextTraffic="true"
+            android:theme="@style/AppTheme"
+            tools:ignore="AllowBackup,GoogleAppIndexingWarning" tools:targetApi="m">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <receiver android:name=".utils.WifiReceiver"
+                  android:enabled="true"
+                  android:exported="false">
+
+            <intent-filter>
+                <!--protected-broadcast: Special broadcast that only the system can send-->
+                <!--Corresponds to: android.net.wifi.WifiManager.NETWORK_STATE_CHANGED_ACTION-->
+                <action android:name="android.net.wifi.STATE_CHANGE"/>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"
+                        tools:ignore="BatteryLife"/>
+            </intent-filter>
+
+        </receiver>
+    </application>
+
+</manifest>

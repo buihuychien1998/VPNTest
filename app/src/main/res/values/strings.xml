@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">VPN Android</string>
+    <string name="ip_address_checker">IP Address Checker</string>
+    <string name="wifi_name">Wifi name</string>
+    <string name="wifi_off">Wifi OFF</string>
+    <string name="ip_address">IP address</string>
+    <string name="device_name">Device name</string>
+    <string name="note">Your Personal Data may be lost when accessing the network anywhere. Click \u0022Protect Your Data\u0022 to ensure data is secure at anytime. Now!</string>
+    <string name="protect_your_data">PROTECT YOUR DATA</string>
+</resources>
